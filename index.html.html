@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Especial ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.05);
+    animation:float 10s infinite linear;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-150px);
+    }
+}
+
+.card{
+    width:90%;
+    max-width:550px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+.hidden{
+    display:none;
+}
+
+h1{
+    margin-bottom:15px;
+    font-size:2rem;
+}
+
+p{
+    color:#dbeafe;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+button{
+    border:none;
+    border-radius:12px;
+    padding:15px 30px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+#sim,
+.confirmar{
+    background:#ec4899;
+    color:white;
+}
+
+#sim:hover,
+.confirmar:hover{
+    transform:translateY(-2px);
+}
+
+#nao{
+    background:white;
+    color:#0f172a;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    margin-top:8px;
+    margin-bottom:18px;
+    border:none;
+    border-radius:12px;
+    font-size:15px;
+}
+
+label{
+    display:block;
+    text-align:left;
+    margin-bottom:5px;
+}
+
+.resumo{
+    text-align:left;
+    background:rgba(255,255,255,.05);
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.success{
+    font-size:1.2rem;
+    line-height:1.8;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="background" id="background"></div>
+
+<!-- PAGINA 1 -->
+
+<div class="card" id="pagina1">
+
+```
+<h1>❤️ Helen ❤️</h1>
+
+<p>
+    Tenho uma pergunta muito importante para você...
+</p>
+
+<p style="font-size:22px;">
+    Você aceita sair comigo?
+</p>
+
+<div class="buttons">
+    <button id="sim">Sim ❤️</button>
+    <button id="nao">Não 🙈</button>
+</div>
+```
+
+</div>
+
+<!-- PAGINA 2 -->
+
+<div class="card hidden" id="pagina2">
+
+```
+<h1>Excelente escolha ✨</h1>
+
+<p>
+    Agora me ajude a organizar nosso encontro.
+</p>
+
+<label>📅 Escolha uma data</label>
+<input type="date" id="data">
+
+<label>⏰ Escolha um horário</label>
+<input type="time" id="hora">
+
+<label>🍽️ Qual comida você prefere?</label>
+<select id="comida">
+    <option value="">Selecione</option>
+    <option>🍕 Pizza</option>
+    <option>🍣 Sushi</option>
+    <option>🍔 Hambúrguer</option>
+    <option>🥩 Churrasco</option>
+    <option>🍝 Massas</option>
+    <option>☕ Café e sobremesa</option>
+</select>
+
+<button class="confirmar" id="continuar">
+    Continuar ❤️
+</button>
+```
+
+</div>
+
+<!-- PAGINA 3 -->
+
+<div class="card hidden" id="pagina3">
+
+```
+<h1>Confirmação ❤️</h1>
+
+<div class="resumo" id="resumo"></div>
+
+<form
+    action="https://formsubmit.co/gilson.a.filho@gmail.com"
+    method="POST"
+    id="formulario">
+
+    <input type="hidden" name="_subject" value="Helen confirmou o encontro ❤️">
+    <input type="hidden" name="_captcha" value="false">
+
+    <input type="hidden" name="Data" id="emailData">
+    <input type="hidden" name="Hora" id="emailHora">
+    <input type="hidden" name="Comida" id="emailComida">
+
+    <button class="confirmar" type="submit">
+        Confirmar Encontro ❤️
+    </button>
+
+</form>
+```
+
+</div>
+
+<!-- PAGINA FINAL -->
+
+<div class="card hidden" id="pagina4">
+
+```
+<h1>❤️ Perfeito Helen! ❤️</h1>
+
+<div class="success">
+
+    Agora a única coisa que falta é eu cuidar dos detalhes.<br><br>
+
+    Te vejo em breve ✨<br><br>
+
+    — Gilson
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* FUNDO ANIMADO */
+
+for(let i=0;i<20;i++){
+
+    const c = document.createElement("div");
+
+    c.className = "circle";
+
+    const size = Math.random()*120 + 40;
+
+    c.style.width = size+"px";
+    c.style.height = size+"px";
+
+    c.style.left = Math.random()*100+"vw";
+
+    c.style.animationDuration =
+        (8 + Math.random()*8)+"s";
+
+    document.getElementById("background")
+        .appendChild(c);
+}
+
+/* BOTAO NAO FUGINDO */
+
+const nao = document.getElementById("nao");
+
+function moverBotao(){
+
+    const largura =
+        window.innerWidth - nao.offsetWidth - 20;
+
+    const altura =
+        window.innerHeight - nao.offsetHeight - 20;
+
+    nao.style.position = "fixed";
+
+    nao.style.left =
+        Math.random()*largura + "px";
+
+    nao.style.top =
+        Math.random()*altura + "px";
+}
+
+nao.addEventListener("mouseenter", moverBotao);
+nao.addEventListener("mouseover", moverBotao);
+
+nao.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    moverBotao();
+});
+
+/* PAGINA 1 -> 2 */
+
+document.getElementById("sim")
+.addEventListener("click", ()=>{
+
+    document.getElementById("pagina1")
+        .classList.add("hidden");
+
+    document.getElementById("pagina2")
+        .classList.remove("hidden");
+
+});
+
+/* PAGINA 2 -> 3 */
+
+document.getElementById("continuar")
+.addEventListener("click", ()=>{
+
+    const data =
+        document.getElementById("data").value;
+
+    const hora =
+        document.getElementById("hora").value;
+
+    const comida =
+        document.getElementById("comida").value;
+
+    if(!data || !hora || !comida){
+
+        alert(
+            "Preencha data, horário e comida 😊"
+        );
+
+        return;
+    }
+
+    document.getElementById("emailData").value =
+        data;
+
+    document.getElementById("emailHora").value =
+        hora;
+
+    document.getElementById("emailComida").value =
+        comida;
+
+    document.getElementById("resumo").innerHTML = `
+        <strong>📅 Data:</strong> ${data}<br><br>
+        <strong>⏰ Horário:</strong> ${hora}<br><br>
+        <strong>🍽️ Comida:</strong> ${comida}<br><br>
+        <strong>📍 Local:</strong> Surpresa... 😎
+    `;
+
+    document.getElementById("pagina2")
+        .classList.add("hidden");
+
+    document.getElementById("pagina3")
+        .classList.remove("hidden");
+
+});
+
+/* ENVIO */
+
+document.getElementById("formulario")
+.addEventListener("submit", function(){
+
+    setTimeout(()=>{
+
+        document.getElementById("pagina3")
+            .classList.add("hidden");
+
+        document.getElementById("pagina4")
+            .classList.remove("hidden");
+
+    },500);
+
+});
+
+</script>
+
+</body>
+</html>
