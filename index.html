@@ -210,23 +210,13 @@ label{
 
 <div class="resumo" id="resumo"></div>
 
-<form
-    action="https://formsubmit.co/gilson.a.filho@gmail.com"
-    method="POST"
-    id="formulario">
+<div id="formulario">
 
-    <input type="hidden" name="_subject" value="Helen confirmou o encontro ❤️">
-    <input type="hidden" name="_captcha" value="false">
-
-    <input type="hidden" name="Data" id="emailData">
-    <input type="hidden" name="Hora" id="emailHora">
-    <input type="hidden" name="Comida" id="emailComida">
-
-    <button class="confirmar" type="submit">
+    <button class="confirmar" id="enviarConvite">
         Confirmar Encontro ❤️
     </button>
 
-</form>
+</div>
 ```
 
 </div>
@@ -364,20 +354,48 @@ document.getElementById("continuar")
 
 });
 
-/* ENVIO */
+document.getElementById("enviarConvite")
+.addEventListener("click", async () => {
 
-document.getElementById("formulario")
-.addEventListener("submit", function(){
+    const data =
+        document.getElementById("emailData").value;
 
-    setTimeout(()=>{
+    const hora =
+        document.getElementById("emailHora").value;
 
-        document.getElementById("pagina3")
-            .classList.add("hidden");
+    const comida =
+        document.getElementById("emailComida").value;
 
-        document.getElementById("pagina4")
-            .classList.remove("hidden");
+    try{
 
-    },500);
+        await fetch(
+            "https://formsubmit.co/ajax/gilson.a.filho@gmail.com",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                },
+                body:JSON.stringify({
+                    Data:data,
+                    Hora:hora,
+                    Comida:comida,
+                    Mensagem:"Helen confirmou o encontro ❤️"
+                })
+            }
+        );
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+    document.getElementById("pagina3")
+        .classList.add("hidden");
+
+    document.getElementById("pagina4")
+        .classList.remove("hidden");
 
 });
 
