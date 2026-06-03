@@ -308,36 +308,26 @@ document.getElementById("sim")
 });
 
 /* PAGINA 2 -> 3 */
+let dadosEncontro = {};
 
 document.getElementById("continuar")
 .addEventListener("click", ()=>{
 
-    const data =
-        document.getElementById("data").value;
-
-    const hora =
-        document.getElementById("hora").value;
-
-    const comida =
-        document.getElementById("comida").value;
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
+    const comida = document.getElementById("comida").value;
 
     if(!data || !hora || !comida){
 
-        alert(
-            "Preencha data, horário e comida 😊"
-        );
-
+        alert("Preencha data, horário e comida 😊");
         return;
     }
 
-    document.getElementById("emailData").value =
-        data;
-
-    document.getElementById("emailHora").value =
-        hora;
-
-    document.getElementById("emailComida").value =
-        comida;
+    dadosEncontro = {
+        data,
+        hora,
+        comida
+    };
 
     document.getElementById("resumo").innerHTML = `
         <strong>📅 Data:</strong> ${data}<br><br>
@@ -354,17 +344,10 @@ document.getElementById("continuar")
 
 });
 
+
 document.getElementById("enviarConvite")
 .addEventListener("click", async () => {
-
-    const data =
-        document.getElementById("emailData").value;
-
-    const hora =
-        document.getElementById("emailHora").value;
-
-    const comida =
-        document.getElementById("emailComida").value;
+const { data, hora, comida } = dadosEncontro;
 
     try{
 
